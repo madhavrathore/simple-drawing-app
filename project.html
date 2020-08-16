@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+	<title>Page to accept details </title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="project.css">
+</head>
+<body>
+	<h3>Information Of A Person</h3>
+		<form name="newForm"  action="newPage.html">
+			<table>
+				<tr>
+					<td>Name   </td>
+					<td>&nbsp;&nbsp;<input type="text" id="name" name="name" placeholder="Full Name" onkeyup="upperKey()" required></td>
+				</tr>
+				<tr>
+					<td>Email   </td>
+					<td>&nbsp;&nbsp;<input type="Email"  id="email" name="email" placeholder="Email Address" required></td>
+				</tr>
+				<tr>
+					<td>Phone Number   </td>
+					<td>( <input type="tel" id="provider" name="provider"  onkeypress="return onlyNumberKey(event)" onkeyup="return printLogo()" max="3" required /> )<span id="logo" class="logo1"></span> <br><br>- 
+						<input type="tel" name="state" id="state" onkeypress="return onlyNumberKey(event)" max="3" required /><span id="stateName" class="state"></span><br><br> - 
+						<input type="tel" name="number" id="number" onkeypress="return onlyNumberKey(event)" max="4" required /></td>
+				</tr>
+			</table>&nbsp;&nbsp;
+			<br><br>
+			<input type="submit" class="submitInfo" value="SUBMIT" onclick="return validate()">
+			&nbsp;&nbsp;
+			<input type="reset" class="resetValue" value="RESET">
+		</form>
+</body>
+<script>
+		function printLogo(newForm) 
+		{
+
+			var provider = document.getElementById('provider').value;
+    		var state = document.getElementById('state').value;
+    		var number = document.getElementById('number').value;
+
+			if(provider > 621 || provider < 799)
+			{
+				alert("provider is Jio");
+				return true;
+			}	
+			else if(provider > 801 || provider < 920 )	
+			{
+				alert("Provider is Idea");
+				return true;
+			}	
+			else if(provider > 921 || provider < 999)
+			{
+				alert("Provider is vodafone");
+				return true;
+			}  
+			else
+			{
+				return false
+			}
+		}
+		function onlyNumberKey(evt) 
+		{
+			var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+        	if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) 
+            	return false; 
+        	
+        	return true;
+		}
+		function upperKey()
+		{
+			var x = document.getElementById("name");
+  			x.value = x.value.toUpperCase();
+		}
+		function validate(newForm)
+		{
+			var name = document.getElementById('name').value;
+			var email = document.getElementById('email').value;
+
+    		var letters = /^[A-Za-z]+$/;
+			if(document.getElementById('name').value.split(' ').length < 2) 
+			{
+			 	alert('Minimum two words are required');
+			 	return false;
+			}
+			else if(name.match(letters))
+			{
+				alert("Pattern does not match");
+				return false;
+			}
+			else 
+			{
+				return true;
+			}
+			var [firstName, lastName] = name.split(" ");
+			if(firstName.trim().length < 4)
+			{
+				alert("length of word must be greater then equal to 4");
+				return false;
+			}
+			else if(lastName.trim().length < 4)
+			{
+				alert("length of word must be greater then equal to 4");
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+
+			if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById('email').value))
+      		{
+        		return true;
+      		}
+      		else
+      		{
+		        alert("You have entered an invalid email address!");
+		        return false;   
+			}
+		}
+
+	</script>
+</html>

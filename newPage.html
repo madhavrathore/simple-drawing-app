@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Submission form</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="project.css">
+
+</head>
+<body>
+	<p> Dear <span id="first-name"></span>, Thank you for your enquiry.
+		A 4 digit verification has been sent to your phone number :<span id="phoneNumber"></span>Please enter in the following form and submit for cconfirmation:
+	</p>
+	<form name="form" onsubmit="return value()">
+	<table>
+		<tr>
+			<td>OTP </td>
+			<td><input type="text" name="otp" id="otp" placeholder="Enter valid 4 digit number"></td>
+		</tr>
+	</table>
+	<input type="submit" value="Submit" class="submitInfo">
+</form>
+</body>
+<script>
+				function value(form)
+				{
+					var otp = document.getElementById('otp').value;
+					var count = 0;
+						if(true )
+						{
+							window.location.href("http://pixel6.co/");
+						}
+						else if(count == 3)
+						{
+								window.location.href('http://pixel6.co/linux');
+						}
+						else
+						{
+							count++;
+							window.location.href('newPage.html');
+						}
+				}
+
+		</script>
+</html>
