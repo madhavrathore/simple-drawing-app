@@ -20,13 +20,20 @@ body
     padding-bottom: 12px;
 	display: inline-flex;
 	width: 40%;
-    margin-left: 35%;x
+    margin-left: 35%;
+}
+.errorHandling{
+        color: red;
+        margin-left: 48%; 
+        font-size: 12px;
+        font-weight: 100;  
 }
 
 .form-div .label {
 	font-size: 14px;
 	width: 32%;
 	line-height: 22px;
+    font-size: 20px;
 }
 
 .input-div{
@@ -37,6 +44,7 @@ body
 	font-size: 16px;
     border: #949c9c 1px solid;
     border-radius: 4px;
+    font-size: 20px;
 }
 
 .input-div input[type=tel]#provider, .input-div input[type=tel]#state{
@@ -62,6 +70,9 @@ body
     font-weight: bold;
     border-radius: 4px;
     margin: 8px;
+}
+.button-div button:disabled{
+    background: grey !important;
 }
 .button-div button#validate{
 	background: #5252b7;

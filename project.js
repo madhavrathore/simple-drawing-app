@@ -1,38 +1,73 @@
-		function handleProvider() 
-		{
+var emailCorrect = false;
+var nameCorrect = false;
+var phoneNumber = false;
+var phone1 = false;
+var phone2 = false;
+var phone3 = false;
+function handleProvider() 
+{
+	var provider = document.getElementById('provider').value;
 
-			var provider = document.getElementById('provider').value;
-    		var state = document.getElementById('state').value;
-    		var number = document.getElementById('number').value;
+	var img = document.createElement('img');
 
-    		var img = document.createElement('img');
+	if(provider > 621 && provider < 799)
+	{
+		document.getElementsByTagName('img')[0].setAttribute('src', "jio.jpeg");
+	}	
+	else if(provider > 801 && provider < 920 )	
+	{
+		document.getElementsByTagName('img')[0].setAttribute('src', "idea.jpeg");
+	}	
+	else if(provider > 921 && provider < 999)
+	{
+		document.getElementsByTagName('img')[0].setAttribute('src', "vodafone.png");
+	}  
+	else
+	{
+		document.getElementById('phoneError').innerHTML = "Invalid Phone Number ";
+		return false
+	}
+	phone1 = true;
+	correctPhoneNumber();
+	return true;
+}
+function handleState(){
+	var state = parseInt(document.getElementById('state').value);
 
-			if(provider > 621 || provider < 799)
+	if(state > 100 && state < 137)
+	{
+		document.getElementById('stateName').innerHTML = map.get(state);
+		phone2 = true;
+		correctPhoneNumber();
+		return true;
+	}
+	else
+	{
+		document.getElementById('phoneError').innerHTML = "Invalid Phone Number";
+		return false;
+	}
+
+}
+function handleNumber(){
+			var phoneNumber = document.getElementById('number').value;
+
+			if(phoneNumber.length == 4)
 			{
-				img.setAttribute('src', "file:///home/madhavsingh/Pixel6/jio.jpeg");
-				document.getElementById('providerInfo').appendChild('img');
+				phone3 = true;
+				correctPhoneNumber();
 				return true;
-			}	
-			else if(provider > 801 || provider < 920 )	
-			{
-				alert("Provider is Idea");
-				img.src = "file:///home/madhavsingh/Pixel6/idea.jpeg";
-				document.getElementById('providerInfo').appendChild('img');
-				return true;
-				
-			}	
-			else if(provider > 921 || provider < 999)
-			{
-				alert("Provider is vodafone");
-				img.src = "file:///home/madhavsingh/Pixel6/vodafone.png";
-				document.getElementById('providerInfo').appendChild('img');
-				return true;
-			}  
-			else
-			{
-				return false
 			}
-		}
+			return false;
+						
+}
+function correctPhoneNumber(){
+	if(phone1 && phone2 && phone3)
+	{
+		phoneNumber = true;
+		enableButton();
+	}
+}
+
 
 function onlyNumberKey(evt) 
 {
@@ -53,49 +88,25 @@ function nameHandling()
 	{
 		var name = document.getElementById('name').value;
 
-		if(document.getElementById('name').value.split(' ').length < 2) 
-		{
-		 	alert('Minimum two words are required');
-		 	return false;
-		}
-		else 
-		{
-			return true;
-		}
-
 		var [firstName, lastName] = name.split(" ");
 
-		alert(firstName);
-
-		if(firstName.trim().length < 4)
+		if(firstName.trim().length < 4 || name.split(' ').length < 2)
 		{
-			alert("Length of word must be greater then equal to 4");
+			document.getElementById('error').innerHTML="Minimum two words are reuired or length of word should be 4";
 			return false;
 		}
 		else if(lastName.trim().length < 4)
 		{
-			alert("Length of word must be greater then equal to 4");
+			document.getElementById('error').innerHTML="Length of word must be 4";
 			return false;
 		}
 		else
 		{
+			localStorage.name = firstName;
+			nameCorrect = true;
+			enableButton();
 			return true;
 		}
-}
-
-function displayBlock()
-{
-	var validationForm = document.getElementById('validation-form');
-
-	if(validationForm.style.display === "none")
-
-	{
-		validationForm.style.display = "block";
-	}
-	else
-	{
-		validationForm.style.display = "none";
-	}
 }
 
 function emailHandling() {
@@ -103,29 +114,22 @@ function emailHandling() {
 
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById('email').value))
       		{
+        		emailCorrect = true;
+        		enableButton();
         		return true;
       		}
       		else
       		{
-		        alert("You have entered an invalid email address!");
+		        document.getElementById('emailError').innerHTML= "You have entered an invalid email address!";
 		        return false;   
 			}
-}
-		
-function generateOTP() {  
-	var digits = '0123456789'; 
-	let OTP = ''; 
-	for (let i = 0; i < 6; i++ ) { 
-		OTP += digits[Math.floor(Math.random() * 10)]; 
-	} 
-		return OTP; 
-} 
+}		
 
-function value(form)
+function validateOTP()
 	{
-		var otp = document.getElementById('otp').value;
+		var otp = document.getElementById('verification').value;
 		var count = 0;
-			if(otp ==OTP )
+			if(otp == localStorage.randomNumber)
 			{
 				window.location.href = "http://pixel6.co/";
 			}
@@ -136,7 +140,7 @@ function value(form)
 			else
 			{
 				count++;
-				window.location.href = "project.html";
+				// window.location.href = "project.html";
 			}
 	}
 
