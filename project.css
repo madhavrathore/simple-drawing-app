@@ -1,78 +1,93 @@
 body
 {	
-	margin:0;
-	padding:0;
-	font-family: sans-serif;
-	background:url("") no-repeat;
-	background-size: cover;
-	margin-left: 27%;
-	margin-top: 8%
+	font-family: 'Roboto', sans-serif;
 }
 
-input
-{
-	padding: 12px 20px 12px 40px;
-	border-radius: 6px;
-	font-size: 15px;
-	font-family: all;
-	transition: width 0.4s ease-in-out;
-	cursor: pointer;
+.content{
+
 }
-input[type=tel]
-{
-	padding: 12px 20px 12px 40px;
-	border-radius: 6px;
-	font-size: 15px;
-	font-family: all;
-	transition: width 0.4s ease-in-out;
-	cursor: pointer;
-}
-input[type=text]:focus,input[type=text]:hover
-{
-	width:100%;
-	background-color: lightgrey;
-}
-input[type=tel]:focus , input[type=tel]:hover
-{
-	width: 60%;
-	background-color: lightgrey;
-}
-input[type=Email]:focus , input[type=Email]:hover
-{
-	width: 100%;
-	background-color: lightgrey;
-}
-input[type=submit],input[type=reset]
-{
-	padding: 16px 32px;
-	border: none;
-	color: white;
-	text-decoration: none;
-	cursor: pointer;
-	background-color: #4CAF50;
-	width:25%;
-}
-.name
-{
-	text-transform: uppercase;
-}
-.submitInfo:hover{
-  background:#383736;
-}
-.resetValue:hover
-{
-	background: #383236;
-}
-h3
-{
-	top: 12%;
-	margin-left: 13%;
-	color: red;
+
+.title{
+	color: #4b4b56;
 	font-size: 20px;
-
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-p
-{
-	margin-right: 26%;
+.form-div {
+	padding-top: 12px;
+    padding-bottom: 12px;
+	display: inline-flex;
+	width: 40%;
+    margin-left: 35%;x
+}
+
+.form-div .label {
+	font-size: 14px;
+	width: 32%;
+	line-height: 22px;
+}
+
+.input-div{
+	display: contents;
+}
+
+.input-div input {
+	font-size: 16px;
+    border: #949c9c 1px solid;
+    border-radius: 4px;
+}
+
+.input-div input[type=tel]#provider, .input-div input[type=tel]#state{
+	width: 8%;
+	/*text-align: center;*/
+}
+.input-div input[type=tel]#number{
+	width: 16%;
+	/*text-align: center;*/
+}
+
+.button-div{
+	padding: 16px;
+}
+
+.button-div button{
+	background: #5252b7;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    border: #4a4a4a 1px solid;
+    padding: 6px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin: 8px;
+}
+.button-div button#validate{
+	background: #5252b7;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    border: #4a4a4a 1px solid;
+    padding: 6px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin: 8px !important;
+}
+
+.button-div button.reset{
+	background: grey !important;
+}
+
+/*.input-div input:hover, .input-div input:focus {
+    border: red 1px solid !important;
+}*/
+.text{
+	font-family: inherit;
+    font-size: 19px;
+    margin-left: 30px;
+    margin-bottom: 16px;
+    margin-top: 16px;
+    color: #13010e;
+    font-weight: 700;
 }
