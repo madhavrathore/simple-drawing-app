@@ -28,6 +28,7 @@ function handleProvider()
 		return false
 	}
 	phone1 = true;
+	localStorage.provider = provider;
 	correctPhoneNumber();
 	return true;
 }
@@ -38,6 +39,7 @@ function handleState(){
 	{
 		document.getElementById('stateName').innerHTML = map.get(state);
 		phone2 = true;
+		localStorage.state = state;
 		correctPhoneNumber();
 		return true;
 	}
@@ -53,6 +55,7 @@ function handleNumber(){
 
 			if(phoneNumber.length == 4)
 			{
+				localStorage.number = phoneNumber;
 				phone3 = true;
 				correctPhoneNumber();
 				return true;
@@ -125,10 +128,12 @@ function emailHandling() {
 			}
 }		
 
-function validateOTP()
+function validateOTP(event)
 	{
 		var otp = document.getElementById('verification').value;
 		var count = 0;
+		while(true)
+		{
 			if(otp == localStorage.randomNumber)
 			{
 				window.location.href = "http://pixel6.co/";
@@ -137,11 +142,12 @@ function validateOTP()
 			{
 					window.location.href ='http://pixel6.co/linux';
 			}
-			else
-			{
+			else{			
 				count++;
-				// window.location.href = "project.html";
 			}
+		}
+		event.preventDefaults();
+		return false;
 	}
 
 function lettersOnly(evt) {

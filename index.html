@@ -31,12 +31,12 @@
 				<div class="label">Phone Number</div>
 				<div class="input-div">
 					<span>&nbsp;(&nbsp;</span>
-					<input type="tel" id="provider" name="provider"  onkeypress="return onlyNumberKey(event)" onchange="handleProvider()"  maxlength="3" required  />
+					<input type="tel" id="provider" name="provider"  onkeypress="return onlyNumberKey(event)" onchange="handleProvider()"  maxlength="3"  onKeyup="autotab(this, document.enquiryForm.state)" required/>
 					<span>&nbsp;)&nbsp;</span>
 					<span> &nbsp;-&nbsp; </span>
-					<input type="tel" name="state" id="state" onkeypress="return onlyNumberKey(event)" maxlength="3" required onchange="handleState()" />
+					<input type="tel" name="state" id="state" onkeypress="return onlyNumberKey(event)" maxlength="3"  onchange="handleState()" onKeyup="autotab(this, document.enquiryForm.number)" required/>
 					<span> &nbsp;-&nbsp;</span>
-					<input type="tel" name="number" id="number" onkeypress="return onlyNumberKey(event)" maxlength="4" onchange="handleNumber()" required />
+					<input type="tel" name="number" id="number" onkeypress="return onlyNumberKey(event)" maxlength="4" onchange="handleNumber()"  required/>
 					<span><img style="width: 42px;height: 30px;" id="providerInfo"></img></span>
 					<span id="stateName"></span>
 				</div>
@@ -44,10 +44,10 @@
 			<div class="errorHandling"><span id="phoneError"></span></div>
 			<div class="button-div">
 				<center>
-				<button class="submit" id="submitButton" disabled="disabled">
+				<button type="button" name="submit" class="submit" id="submitButton" disabled="disabled" onclick="submitForm()">
 					Submit
 				</button>
-				<button class="reset" type="reset">
+				<button type="button" class="reset" type="reset">
 					Reset
 				</button>
 				</center>
@@ -56,21 +56,22 @@
 	</div>
 	</div>
 	<div class="validation-form">
-		<form id="validation-form" name="verification" style="display: none;" onload="loadInfo(verification)" >
+		<form id="validation-form" style="display: none;" >
 			<center>
-				<div class="text"> <p>Dear <span id="fname"></span>,
-					Thank you for your enquiry. A 4 digit verification number has been sent to your phone number:<span id="phoneNumber"></span>,please enter in the following box and submit for confirmation:</p>
+				<div class="text"> 
+					<p>Dear <span id="fname" style="color: red;background : yellow;"></span>,
+					Thank you for your enquiry. A 4 digit verification number has been sent to your phone number: &nbsp;<span id="providerNumber" style="color: red;background : yellow;"></span><span id="stateNumber" style="color: red;background : yellow;"></span><span id="lastNumber" style="color: red;background : yellow;"></span>&nbsp;,please enter in the following box and submit for confirmation:</p>
 				</div>
 			</center>
 			<div class="form-div">
 				<div class="label">Verification Number</div>
 				<div class="input-div">
-					<input type="text" onkeypress="return onlyNumberKey(event)" id="verification" name="verificationCode" placeholder="Verification Number" required>
+					<input type="text" onkeypress="return onlyNumberKey(event)" id="verification" name="verificationCode" placeholder="Verification Number" maxlength="4" required>
 				</div>
 			</div>
 			<center>
 			<div class="button-div">
-				<button class="validate" onsubmit="ValidateOTP()">
+				<button type="button" class="validate" onclick="validateOTP(event); return false;">
 					Validate
 				</button>
 			</div>
@@ -81,17 +82,27 @@
 <script src="project.js"></script>
 <script type="text/javascript">
 	var map;
-	function enableButton()
+	function autotab(original,destination){
+		if (original.getAttribute&&original.value.length==original.getAttribute("maxlength"))
+		destination.focus();
+	}
+	function enableButton(){
+		 if(phoneNumber && emailCorrect && nameCorrect){
+				document.getElementById('submitButton').disabled = false;
+		}
+	}
+
+	function submitForm()
     {
 
         var validationForm = document.getElementById('validation-form');
         var enquiryForm = document.getElementById('enquiry-form');
-        
-        if(phoneNumber && emailCorrect && nameCorrect)
-        {
 	    	enquiryForm.style.display = "none";
 	    	validationForm.style.display = "block";
-        }
+	    	document.getElementById('fname').innerHTML = localStorage.name;
+	    	document.getElementById('providerNumber').innerHTML = localStorage.provider ;
+	    	document.getElementById('stateNumber').innerHTML = localStorage.state ;
+	    	document.getElementById('lastNumber').innerHTML = localStorage.number ;
     }
 
 	function pageLoad()
@@ -114,9 +125,6 @@
 	    } 
 	    return localStorage.randomNumber;
 	}
-	function loadInfo()
-	{
-		document.getElementById('fname').innerHTML = localStorage.name;
-	}
+
 </script>
 </html>
