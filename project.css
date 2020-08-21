@@ -60,6 +60,7 @@ body
 
 .button-div button{
 	background: #5252b7;
+    cursor: pointer;
     color: white;
     font-size: 14px;
     outline: none;
@@ -71,6 +72,7 @@ body
 }
 .button-div button:disabled{
     background: grey !important;
+    cursor: auto;
 }
 .button-div button#validate{
 	background: #5252b7;

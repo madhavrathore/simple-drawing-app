@@ -112,8 +112,6 @@ function emailHandling() {
 function validateOTP(event)
 	{
 		var otp = document.getElementById('verification').value;
-
-		while(true){
 			
 			if(otp == localStorage.randomNumber)
 			{
@@ -131,7 +129,6 @@ function validateOTP(event)
 				window.location ='http://pixel6.co/linux';
 				return false;
 			}
-		}
 		event.preventDefaults();
 		return false;
 	}
