@@ -1,74 +1,55 @@
 var emailCorrect = false;
 var nameCorrect = false;
 var phoneNumber = false;
-var phone1 = false;
-var phone2 = false;
-var phone3 = false;
-function handleProvider() 
+var count = 0;
+
+
+function numberHandling()
 {
-	var provider = document.getElementById('provider').value;
+	var phone = document.getElementById('phoneNumber').value;
 
-	var img = document.createElement('img');
+	var num1='('+phone.substr(0, 3)
+	var num2=num1.concat(')-',phone.substr(3, 3))
+	var num3=num2.concat('-',phone.substr(6,4))
+	document.getElementById('phoneNumber').value=num3;
 
-	if(provider > 621 && provider < 799)
+	if(phone.length == 10)
 	{
-		document.getElementsByTagName('img')[0].setAttribute('src', "jio.jpeg");
-	}	
-	else if(provider > 801 && provider < 920 )	
-	{
-		document.getElementsByTagName('img')[0].setAttribute('src', "idea.jpeg");
-	}	
-	else if(provider > 921 && provider < 999)
-	{
-		document.getElementsByTagName('img')[0].setAttribute('src', "vodafone.png");
-	}  
-	else
-	{
-		document.getElementById('phoneError').innerHTML = "Invalid Phone Number ";
-		return false
-	}
-	phone1 = true;
-	localStorage.provider = provider;
-	correctPhoneNumber();
-	return true;
-}
-function handleState(){
-	var state = parseInt(document.getElementById('state').value);
-
-	if(state > 100 && state < 137)
-	{
-		document.getElementById('stateName').innerHTML = map.get(state);
-		phone2 = true;
-		localStorage.state = state;
-		correctPhoneNumber();
-		return true;
-	}
-	else
-	{
-		document.getElementById('phoneError').innerHTML = "Invalid Phone Number";
-		return false;
-	}
-
-}
-function handleNumber(){
-			var phoneNumber = document.getElementById('number').value;
-
-			if(phoneNumber.length == 4)
-			{
-				localStorage.number = phoneNumber;
-				phone3 = true;
-				correctPhoneNumber();
-				return true;
-			}
-			return false;
-						
-}
-function correctPhoneNumber(){
-	if(phone1 && phone2 && phone3)
-	{
+		localStorage.number = num3;
 		phoneNumber = true;
 		enableButton();
 	}
+
+	for (var i = 0; i < phone.length; i++) {
+		var n = phone[i];
+	}
+	var number = phone[0].concat(phone[1],phone[2]);
+
+	var stateValue = parseInt(phone[3].concat(phone[4],phone[5]));
+	
+	if(number > 621 && number < 799)
+		{
+			document.getElementsByTagName('img')[0].setAttribute('src', "jio.jpeg");
+		}	
+		else if(number > 801 && number < 920 )	
+		{
+			document.getElementsByTagName('img')[0].setAttribute('src', "idea.jpeg");
+		}	
+		else if(number > 921 && number < 999)
+		{
+			document.getElementsByTagName('img')[0].setAttribute('src', "vodafone.png");
+		}  
+		else
+		{
+			document.getElementById('phoneError').innerHTML = "Invalid Phone Number ";
+		}
+
+	if(stateValue > 100 && stateValue < 137)
+		document.getElementById('stateName').innerHTML = map.get(stateValue);
+	else
+		document.getElementById('phoneError').innerHTML = "Invalid Phone Number ";
+	
+	return false;
 }
 
 
@@ -131,19 +112,24 @@ function emailHandling() {
 function validateOTP(event)
 	{
 		var otp = document.getElementById('verification').value;
-		var count = 0;
-		while(true)
-		{
+
+		while(true){
+			
 			if(otp == localStorage.randomNumber)
 			{
-				window.location.href = "http://pixel6.co/";
+				window.location = "http://pixel6.co/";
+				return false;
 			}
-			else if(count == 3)
+			else if(count != 3)
 			{
-					window.location.href ='http://pixel6.co/linux';
+				count = count+1;
+				document.getElementById("correctOtp").innerHTML = "Enter the valid OTP";
+				return true;
+				
 			}
 			else{			
-				count++;
+				window.location ='http://pixel6.co/linux';
+				return false;
 			}
 		}
 		event.preventDefaults();

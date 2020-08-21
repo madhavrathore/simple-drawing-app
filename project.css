@@ -47,13 +47,11 @@ body
     font-size: 20px;
 }
 
-.input-div input[type=tel]#provider, .input-div input[type=tel]#state{
-	width: 8%;
-	/*text-align: center;*/
-}
-.input-div input[type=tel]#number{
-	width: 16%;
-	/*text-align: center;*/
+.input-div input[type=tel]{
+    font-size: 14px;
+    border: #949c9c 1px solid;
+    border-radius: 4px;
+    font-size: 20px;
 }
 
 .button-div{

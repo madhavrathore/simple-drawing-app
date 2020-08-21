@@ -30,13 +30,7 @@
 			<div class="form-div">
 				<div class="label">Phone Number</div>
 				<div class="input-div">
-					<span>&nbsp;(&nbsp;</span>
-					<input type="tel" id="provider" name="provider"  onkeypress="return onlyNumberKey(event)" onchange="handleProvider()"  maxlength="3"  onKeyup="autotab(this, document.enquiryForm.state)" required/>
-					<span>&nbsp;)&nbsp;</span>
-					<span> &nbsp;-&nbsp; </span>
-					<input type="tel" name="state" id="state" onkeypress="return onlyNumberKey(event)" maxlength="3"  onchange="handleState()" onKeyup="autotab(this, document.enquiryForm.number)" required/>
-					<span> &nbsp;-&nbsp;</span>
-					<input type="tel" name="number" id="number" onkeypress="return onlyNumberKey(event)" maxlength="4" onchange="handleNumber()"  required/>
+					<input type="tel" name="phoneNumber" id="phoneNumber" onkeypress="return onlyNumberKey(event)" onchange="return numberHandling()" maxlength="10" required />
 					<span><img style="width: 42px;height: 30px;" id="providerInfo"></img></span>
 					<span id="stateName"></span>
 				</div>
@@ -60,8 +54,9 @@
 			<center>
 				<div class="text"> 
 					<p>Dear <span id="fname" style="color: red;background : yellow;"></span>,
-					Thank you for your enquiry. A 4 digit verification number has been sent to your phone number: &nbsp;<span id="providerNumber" style="color: red;background : yellow;"></span><span id="stateNumber" style="color: red;background : yellow;"></span><span id="lastNumber" style="color: red;background : yellow;"></span>&nbsp;,please enter in the following box and submit for confirmation:</p>
+					Thank you for your enquiry. A 4 digit verification number has been sent to your phone number: &nbsp;<span id="phoneValue" style="color: red;background : yellow;"></span>&nbsp;,please enter in the following box and submit for confirmation:</p>
 				</div>
+				<span id="correctOtp" style="margin-left: 65px;"></span>
 			</center>
 			<div class="form-div">
 				<div class="label">Verification Number</div>
@@ -69,9 +64,10 @@
 					<input type="text" onkeypress="return onlyNumberKey(event)" id="verification" name="verificationCode" placeholder="Verification Number" maxlength="4" required>
 				</div>
 			</div>
+			<span id="randomNumber"></span>
 			<center>
 			<div class="button-div">
-				<button type="button" class="validate" onclick="validateOTP(event); return false;">
+				<button type="button" class="validate" onclick="validateOTP(event)" />
 					Validate
 				</button>
 			</div>
@@ -82,16 +78,19 @@
 <script src="project.js"></script>
 <script type="text/javascript">
 	var map;
+	//making autotab for phone number entry
 	function autotab(original,destination){
 		if (original.getAttribute&&original.value.length==original.getAttribute("maxlength"))
 		destination.focus();
 	}
+
+	//To enable Button
 	function enableButton(){
 		 if(phoneNumber && emailCorrect && nameCorrect){
 				document.getElementById('submitButton').disabled = false;
 		}
 	}
-
+	//	After enableling button display changes
 	function submitForm()
     {
 
@@ -100,10 +99,10 @@
 	    	enquiryForm.style.display = "none";
 	    	validationForm.style.display = "block";
 	    	document.getElementById('fname').innerHTML = localStorage.name;
-	    	document.getElementById('providerNumber').innerHTML = localStorage.provider ;
-	    	document.getElementById('stateNumber').innerHTML = localStorage.state ;
-	    	document.getElementById('lastNumber').innerHTML = localStorage.number ;
+	    	document.getElementById('phoneValue').innerHTML = localStorage.number;
+	    	document.getElementById('randomNumber').innerHTML = localStorage.randomNumber;
     }
+    //To generate OTP and mapping states 
 
 	function pageLoad()
 	{
@@ -123,6 +122,7 @@
 		for(var i = 0; i < statesValue.length; i++){ 
 	        map.set(statesValue[i], stateName[i]); 
 	    } 
+
 	    return localStorage.randomNumber;
 	}
 
