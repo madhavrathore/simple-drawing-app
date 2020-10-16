@@ -1,0 +1,19 @@
+body{
+	background-color: black !important;
+}
+.box{
+		padding: 5px 5px 5px 5px;
+		margin: 2px;
+		border: 2px  solid black; 
+		background-color: white;
+}
+button{
+		width:150px;
+}
+.text{
+	color: orangered;
+    font-style: italic;
+    font-size: 2.5rem;
+    font-family: sans-serif;
+
+}
