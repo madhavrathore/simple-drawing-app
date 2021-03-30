@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="author" content="Drawing">
 	<meta charset="utf-8">
 	<title>Simple Drawing Application</title>
-	
-	<!-- Linking drawing app css  -->
-
 	<link rel="stylesheet" type="text/css" href="drawingApp.css">
-
-	<!-- Linking Bootstrap CSS Files -->
-
+	<link rel="icon" href="http://pixel6.co/wp-content/themes/pixel6/favicon.ico">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script type="text/javascript" src="script.js"></script>
 
@@ -20,13 +16,19 @@
 	<header>
 		<section class="container">
 
-			<center><h1 class="text">Simple Drawing App</h1></center>
-			<hr style="border-width: 3px solid black;">
-			<div align="center" class="box" >
-			<canvas id="canvas" width="1000" height="400"></canvas>
+			<center>
+				<h1 class="text mb-4 mt-3">Simple Drawing App</h1>
+			</center>
+			
+			<div align="center" class="box">
+			<canvas id="canvas" width="1095" height="600"></canvas>
 		</section>
 		<section>
-			<center><input type="button"  id="clear" class="btn-primary" name="Clear" value="Clear"></center>
+			<center>
+				<div>
+					<input type="button"  id="clear" class="btn btn-primary btn-outline-success mt-4" name="Clear" value="Clear">	
+				</div>
+			</center>
 		</section>
 	</header>
 
